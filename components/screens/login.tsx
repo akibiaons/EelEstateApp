@@ -11,6 +11,7 @@ import {useTailwind} from 'tailwind-rn';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/RootStackParamList';
 import {loginUser} from '../../api/authService';
+import axios from 'axios';
 
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -22,12 +23,22 @@ type Props = {
 };
 
 const LoginScreen = ({navigation}: Props) => {
+  // Tailwind state
   const tailwind = useTailwind();
+
+  // userAuth states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  //Error handling state:
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Loading spinner state
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
+    // reset the error message below
+    setErrorMessage('');
+    // loading state for spinner
     setIsLoading(true);
 
     if (!email || !password) {
@@ -47,12 +58,13 @@ const LoginScreen = ({navigation}: Props) => {
       console.log('Login successful', user);
       // Here you can navigate to another screen if login is successful
     } catch (error) {
-      const err = error as {response?: {data: string}}; // Type assertion
-      console.error('There was a problem logging in', err);
-      Alert.alert(
-        'Login failed',
-        err.response ? err.response.data : 'unknown error',
-      ); // Display error message to user
+      let errorMessage = 'Email or password incorrect!'; // Default error message
+      // Assuming error is of AxiosError type
+      if (axios.isAxiosError(error) && error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      }
+      console.error('Login error:', errorMessage);
+      setErrorMessage(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -65,6 +77,14 @@ const LoginScreen = ({navigation}: Props) => {
 
   return (
     <View style={tailwind('flex-1 justify-center px-4 bg-white')}>
+      {
+        //Below is the error handling ui informing user of incorrect email/password
+      }
+      {errorMessage ? (
+        <Text style={tailwind('text-red-500 text-center mb-4')}>
+          {errorMessage}
+        </Text>
+      ) : null}
       {isLoading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
