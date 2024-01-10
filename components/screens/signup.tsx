@@ -14,6 +14,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/RootStackParamList';
 // API import below
 import {signupUser} from '../../api/authService';
+import axios from 'axios';
 
 type SignupScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -32,11 +33,19 @@ const SignupScreen = ({navigation}: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  //Loading spinner state
+  //Loading spinner state:
   const [isLoading, setIsLoading] = useState(false);
+
+  // State for UI errors in red:
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // End of state hooks...
 
   // Signup function
   const handleSignup = async () => {
+    // reset the error message below:
+    setErrorMessage('');
+
     // is loading state true when running handleSignUp function
     setIsLoading(true);
 
@@ -50,8 +59,8 @@ const SignupScreen = ({navigation}: Props) => {
       Alert.alert('Invalid email format');
       return;
     }
-
-    /* Sign up logic after validation checks */
+    // End of the conditionals above to check and validate email + password are correctly written
+    // Sign up logic after validation checks
     try {
       const userData = {
         email,
@@ -60,7 +69,13 @@ const SignupScreen = ({navigation}: Props) => {
       const user = await signupUser(userData);
       console.log('New user created!');
     } catch (error) {
-      console.log('There was an error signing up!', error);
+      let errorMessage = 'An unexpected error occurred'; // Default error message
+      // Assuming error is of AxiosError type
+      if (axios.isAxiosError(error) && error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      }
+      console.error('Signup error:', errorMessage);
+      setErrorMessage(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -75,6 +90,12 @@ const SignupScreen = ({navigation}: Props) => {
   // Return UI and all that good stuff
   return (
     <View style={tailwind('flex-1 justify-center px-4 bg-white')}>
+      {errorMessage ? (
+        <Text style={tailwind('text-red-500 text-center mb-4')}>
+          {errorMessage}
+        </Text>
+      ) : null}
+      {/* Rest of the component? How will I merge it with isLoading for the spinner (which I really like!!) */}
       {isLoading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
