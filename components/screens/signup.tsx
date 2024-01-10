@@ -69,7 +69,7 @@ const SignupScreen = ({navigation}: Props) => {
       const user = await signupUser(userData);
       console.log('New user created!');
     } catch (error) {
-      let errorMessage = 'An unexpected error occurred'; // Default error message
+      let errorMessage = 'Email already in use! Try Signing in!'; // Default error message
       // Assuming error is of AxiosError type
       if (axios.isAxiosError(error) && error.response?.data?.error) {
         errorMessage = error.response.data.error;
@@ -87,7 +87,7 @@ const SignupScreen = ({navigation}: Props) => {
     return re.test(email);
   }
 
-  // Return UI and all that good stuff
+  // Return UI and all that good stuff to the user
   return (
     <View style={tailwind('flex-1 justify-center px-4 bg-white')}>
       {errorMessage ? (
