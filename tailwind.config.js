@@ -4,7 +4,11 @@ module.exports = {
     './components/screens/signup.tsx',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        OCOMNI: 'OCOMNI',
+      },
+    },
   },
   plugins: [],
   corePlugins: require('tailwind-rn/unsupported-core-plugins'),

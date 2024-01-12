@@ -105,15 +105,9 @@ const SignupScreen = ({navigation}: Props) => {
         <>
           {/* View Box for the logo image to be centered */}
           <View style={tailwind('items-center mb-12')}>
-            <Text>BEAR</Text>
-            {/* Basic Entry Automation Real Estate */}
-            {/* <Image // Note for Image. There needs to be a set height and width as it is not intuitive like web dev
-              source={{
-                uri: 'https://raw.githubusercontent.com/gualberto2/ocomni/main/public/favicon.ico',
-              }}
-              style={{width: 70, height: 70}}
-              resizeMode="contain"
-            /> */}
+            <Text style={tailwind('font-OCOMNI uppercase text-2xl font-bold')}>
+              BEAR
+            </Text>
           </View>
           <View style={tailwind('pt-8')}>
             <TextInput
