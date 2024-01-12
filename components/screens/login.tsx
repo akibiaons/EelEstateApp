@@ -6,11 +6,10 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
-  Image,
 } from 'react-native';
 import {useTailwind} from 'tailwind-rn';
-import GradientBackground from '../UI/auroraGradient';
-import {StyleSheet} from 'react-native';
+// import GradientBackground from '../UI/auroraGradient';
+// import {StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/RootStackParamList';
 import {loginUser} from '../../api/authService';
@@ -32,11 +31,14 @@ const LoginScreen = ({navigation}: Props) => {
   // userAuth states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   //Error handling state:
   const [errorMessage, setErrorMessage] = useState('');
 
   // Loading spinner state
   const [isLoading, setIsLoading] = useState(false);
+
+  // End of state hooks
 
   const handleLogin = async () => {
     // reset the error message below
@@ -107,12 +109,6 @@ const LoginScreen = ({navigation}: Props) => {
               resizeMode="contain"
             /> */}
           </View>
-          {/* <TouchableOpacity style={tailwind('mb-4')}>
-            <Text style={tailwind('text-center')}>Continue with Google</Text>
-          </TouchableOpacity> */}
-          {/* <Text style={tailwind('text-center mb-4')}>or</Text> */}
-
-          {/* Text inputs for collecting email and passwords */}
           <View style={tailwind('pt-8')}>
             <TextInput
               placeholder="Email address"

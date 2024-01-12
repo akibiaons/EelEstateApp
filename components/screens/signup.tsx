@@ -53,10 +53,13 @@ const SignupScreen = ({navigation}: Props) => {
     if (!email || !password) {
       // Handle empty fields
       Alert.alert('Please fill in all fields');
+      setIsLoading(false); // Stop loading when there's an input validation error
       return;
     }
+
     if (!validateEmail(email)) {
       Alert.alert('Invalid email format');
+      setIsLoading(false); // Stop loading when there's an input validation error
       return;
     }
     // End of the conditionals above to check and validate email + password are correctly written
@@ -89,7 +92,7 @@ const SignupScreen = ({navigation}: Props) => {
 
   // Return UI and all that good stuff to the user
   return (
-    <View style={tailwind('flex-1 justify-center px-4 bg-white')}>
+    <View style={tailwind('flex-1 justify-center px-2 bg-gray-500')}>
       {errorMessage ? (
         <Text style={tailwind('text-red-500 text-center mb-4')}>
           {errorMessage}
@@ -100,37 +103,48 @@ const SignupScreen = ({navigation}: Props) => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
         <>
-          <Text style={tailwind('text-xl font-bold text-center mb-6')}>
-            Create your account
-          </Text>
-
-          <TouchableOpacity style={tailwind('mb-4')}>
-            <Text style={tailwind('text-center')}>Continue with Google</Text>
-          </TouchableOpacity>
-
-          <Text style={tailwind('text-center mb-4')}>or</Text>
-
-          <TextInput
-            placeholder="Email address"
-            style={tailwind('border-b border-gray-300 py-2 mb-4')}
-            value={email}
-            onChangeText={setEmail}
-          />
-
-          <TextInput
-            placeholder="Password"
-            secureTextEntry
-            style={tailwind('border-b border-gray-300 py-2 mb-4')}
-            value={password}
-            onChangeText={setPassword}
-          />
-
-          <TouchableOpacity
-            style={tailwind('bg-blue-500 rounded-lg py-2 mb-4')}
-            onPress={handleSignup}>
-            <Text style={tailwind('text-white text-center')}>CONTINUE</Text>
-          </TouchableOpacity>
-
+          {/* View Box for the logo image to be centered */}
+          <View style={tailwind('items-center mb-12')}>
+            <Text>BEAR</Text>
+            {/* Basic Entry Automation Real Estate */}
+            {/* <Image // Note for Image. There needs to be a set height and width as it is not intuitive like web dev
+              source={{
+                uri: 'https://raw.githubusercontent.com/gualberto2/ocomni/main/public/favicon.ico',
+              }}
+              style={{width: 70, height: 70}}
+              resizeMode="contain"
+            /> */}
+          </View>
+          <View style={tailwind('pt-8')}>
+            <TextInput
+              placeholder="Email address"
+              placeholderTextColor="#9CA3AF"
+              style={tailwind(
+                'text-black rounded-xl border border-gray-300 bg-gray-200 h-12 mb-2 px-4 ',
+              )}
+              value={email}
+              onChangeText={setEmail}
+            />
+            <TextInput
+              placeholder="Password"
+              placeholderTextColor="#9CA3AF"
+              secureTextEntry
+              style={tailwind(
+                'text-black rounded-xl border border-gray-300 bg-gray-200 h-12 px-4',
+              )}
+              value={password}
+              onChangeText={setPassword}
+            />
+          </View>
+          <View>
+            <TouchableOpacity
+              style={tailwind('mt-4 rounded-xl bg-blue-500 py-3')}
+              onPress={handleSignup}>
+              <Text style={tailwind('text-white text-center text-xl')}>
+                Signup
+              </Text>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={tailwind('text-center text-blue-500')}>
               Have an account? Sign in
