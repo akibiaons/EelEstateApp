@@ -9,6 +9,8 @@ import {
   Image,
 } from 'react-native';
 import {useTailwind} from 'tailwind-rn';
+import GradientBackground from '../UI/auroraGradient';
+import {StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/RootStackParamList';
 import {loginUser} from '../../api/authService';
@@ -77,7 +79,7 @@ const LoginScreen = ({navigation}: Props) => {
   }
 
   return (
-    <View style={tailwind('flex-1 justify-center px-2 bg-black')}>
+    <View style={tailwind('flex-1 justify-center px-2 bg-gray-500')}>
       {
         //Below is the error handling ui informing user of incorrect email/password
       }
@@ -90,13 +92,17 @@ const LoginScreen = ({navigation}: Props) => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
         <>
+          {/* Absolute positioned gradient background */}
+          {/* <GradientBackground style={StyleSheet.absoluteFillObject} /> */}
+
           {/* View Box for the logo image to be centered */}
           <View style={tailwind('items-center mb-12')}>
             <Image // Note for Image. There needs to be a set height and width as it is not intuitive like web dev
               source={{
                 uri: 'https://raw.githubusercontent.com/gualberto2/ocomni/main/public/favicon.ico',
               }}
-              style={{width: 50, height: 50}} // Set the width and height
+              style={{width: 70, height: 70}}
+              resizeMode="contain"
             />
           </View>
           {/* <TouchableOpacity style={tailwind('mb-4')}>
@@ -110,7 +116,7 @@ const LoginScreen = ({navigation}: Props) => {
               placeholder="Email address"
               placeholderTextColor="#9CA3AF"
               style={tailwind(
-                'text-black rounded-xl border border-gray-300 bg-gray-500 h-12 mb-2',
+                'text-black rounded-xl border border-gray-300 bg-gray-200 h-12 mb-2 px-4 ',
               )}
               value={email}
               onChangeText={setEmail}
@@ -120,7 +126,7 @@ const LoginScreen = ({navigation}: Props) => {
               placeholderTextColor="#9CA3AF"
               secureTextEntry
               style={tailwind(
-                'text-black rounded-xl border border-gray-300 bg-gray-500 h-12',
+                'text-black rounded-xl border border-gray-300 bg-gray-200 h-12 px-4',
               )}
               value={password}
               onChangeText={setPassword}

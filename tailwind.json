@@ -149,6 +149,12 @@
 			"backgroundColor": "rgb(107 114 128 / var(--tw-bg-opacity))"
 		}
 	},
+	"bg-gray-200": {
+		"style": {
+			"--tw-bg-opacity": 1,
+			"backgroundColor": "rgb(229 231 235 / var(--tw-bg-opacity))"
+		}
+	},
 	"px-4": {
 		"style": {
 			"paddingLeft": 16,
