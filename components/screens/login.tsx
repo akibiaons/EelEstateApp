@@ -97,13 +97,15 @@ const LoginScreen = ({navigation}: Props) => {
 
           {/* View Box for the logo image to be centered */}
           <View style={tailwind('items-center mb-12')}>
-            <Image // Note for Image. There needs to be a set height and width as it is not intuitive like web dev
+            <Text>BEAR</Text>
+            {/* Basic Entry Automation Real Estate */}
+            {/* <Image // Note for Image. There needs to be a set height and width as it is not intuitive like web dev
               source={{
                 uri: 'https://raw.githubusercontent.com/gualberto2/ocomni/main/public/favicon.ico',
               }}
               style={{width: 70, height: 70}}
               resizeMode="contain"
-            />
+            /> */}
           </View>
           {/* <TouchableOpacity style={tailwind('mb-4')}>
             <Text style={tailwind('text-center')}>Continue with Google</Text>
@@ -136,7 +138,9 @@ const LoginScreen = ({navigation}: Props) => {
             <TouchableOpacity
               style={tailwind('mt-4 rounded-xl bg-blue-500 py-3')}
               onPress={handleLogin}>
-              <Text style={tailwind('text-white text-center')}>Login</Text>
+              <Text style={tailwind('text-white text-center text-xl')}>
+                Login
+              </Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
