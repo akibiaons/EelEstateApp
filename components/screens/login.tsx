@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import {useTailwind} from 'tailwind-rn';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -76,7 +77,7 @@ const LoginScreen = ({navigation}: Props) => {
   }
 
   return (
-    <View style={tailwind('flex-1 justify-center px-4 bg-white')}>
+    <View style={tailwind('flex-1 justify-center px-2 bg-black')}>
       {
         //Below is the error handling ui informing user of incorrect email/password
       }
@@ -89,31 +90,49 @@ const LoginScreen = ({navigation}: Props) => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
         <>
-          <Text style={tailwind('text-xl font-bold text-center mb-6')}>
-            Login
-          </Text>
-          <TouchableOpacity style={tailwind('mb-4')}>
+          {/* View Box for the logo image to be centered */}
+          <View style={tailwind('items-center mb-12')}>
+            <Image // Note for Image. There needs to be a set height and width as it is not intuitive like web dev
+              source={{
+                uri: 'https://raw.githubusercontent.com/gualberto2/ocomni/main/public/favicon.ico',
+              }}
+              style={{width: 50, height: 50}} // Set the width and height
+            />
+          </View>
+          {/* <TouchableOpacity style={tailwind('mb-4')}>
             <Text style={tailwind('text-center')}>Continue with Google</Text>
-          </TouchableOpacity>
-          <Text style={tailwind('text-center mb-4')}>or</Text>
-          <TextInput
-            placeholder="Email address"
-            style={tailwind('border-b border-gray-300 py-2 mb-4')}
-            value={email}
-            onChangeText={setEmail}
-          />
-          <TextInput
-            placeholder="Password"
-            secureTextEntry
-            style={tailwind('border-b border-gray-300 py-2 mb-4')}
-            value={password}
-            onChangeText={setPassword}
-          />
-          <TouchableOpacity
-            style={tailwind('bg-blue-500 rounded-lg py-2 mb-4')}
-            onPress={handleLogin}>
-            <Text style={tailwind('text-white text-center')}>CONTINUE</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
+          {/* <Text style={tailwind('text-center mb-4')}>or</Text> */}
+
+          {/* Text inputs for collecting email and passwords */}
+          <View style={tailwind('pt-8')}>
+            <TextInput
+              placeholder="Email address"
+              placeholderTextColor="#9CA3AF"
+              style={tailwind(
+                'text-black rounded-xl border border-gray-300 bg-gray-500 h-12 mb-2',
+              )}
+              value={email}
+              onChangeText={setEmail}
+            />
+            <TextInput
+              placeholder="Password"
+              placeholderTextColor="#9CA3AF"
+              secureTextEntry
+              style={tailwind(
+                'text-black rounded-xl border border-gray-300 bg-gray-500 h-12',
+              )}
+              value={password}
+              onChangeText={setPassword}
+            />
+          </View>
+          <View>
+            <TouchableOpacity
+              style={tailwind('mt-4 rounded-xl bg-blue-500 py-3')}
+              onPress={handleLogin}>
+              <Text style={tailwind('text-white text-center')}>Login</Text>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
             <Text style={tailwind('text-center text-blue-500')}>
               No account? Sign up
