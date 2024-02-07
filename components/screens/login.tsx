@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Image,
   ImageBackground,
   View,
   Text,
@@ -107,10 +108,15 @@ const LoginScreen = ({navigation}: Props) => {
             {/* <GradientBackground style={StyleSheet.absoluteFillObject} /> */}
 
             {/* View Box for the logo image to be centered */}
-            <View style={tailwind('items-center mb-12')}>
-              <Text
-                style={tailwind('font-OCOMNI uppercase text-2xl font-bold')}>
-                FinState
+            <View style={tailwind('items-center')}>
+              <Image
+                source={{
+                  uri: 'https://res.cloudinary.com/dfgr7tov1/image/upload/v1707281669/FinEstateLogo_b1aaz0.png',
+                }}
+                style={tw`w-32 h-20`}
+              />
+              <Text style={tailwind('font-OCOMNI uppercase text-xl')}>
+                Fin-Estate
               </Text>
             </View>
             <View style={tailwind('pt-8')}>
