@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 // UI Imports below
 import {
+  ImageBackground,
   View,
   Text,
   TextInput,
@@ -9,6 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useTailwind} from 'tailwind-rn';
+import tw from 'tailwind-react-native-classnames';
 // Navigation imports below:
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../types/RootStackParamList';
@@ -92,61 +94,69 @@ const SignupScreen = ({navigation}: Props) => {
 
   // Return UI and all that good stuff to the user
   return (
-    <View style={tailwind('flex-1 justify-center px-2 bg-gray-500')}>
-      {errorMessage ? (
-        <Text style={tailwind('text-red-500 text-center mb-4')}>
-          {errorMessage}
-        </Text>
-      ) : null}
-      {/* Rest of the component? How will I merge it with isLoading for the spinner (which I really like!!) */}
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        <>
-          {/* View Box for the logo image to be centered */}
-          <View style={tailwind('items-center mb-12')}>
-            <Text style={tailwind('font-OCOMNI uppercase text-2xl font-bold')}>
-              BEAR
-            </Text>
-          </View>
-          <View style={tailwind('pt-8')}>
-            <TextInput
-              placeholder="Email address"
-              placeholderTextColor="#9CA3AF"
-              style={tailwind(
-                'text-black rounded-xl border border-gray-300 bg-gray-200 h-12 mb-2 px-4 ',
-              )}
-              value={email}
-              onChangeText={setEmail}
-            />
-            <TextInput
-              placeholder="Password"
-              placeholderTextColor="#9CA3AF"
-              secureTextEntry
-              style={tailwind(
-                'text-black rounded-xl border border-gray-300 bg-gray-200 h-12 px-4',
-              )}
-              value={password}
-              onChangeText={setPassword}
-            />
-          </View>
-          <View>
-            <TouchableOpacity
-              style={tailwind('mt-4 rounded-xl bg-blue-500 py-3')}
-              onPress={handleSignup}>
-              <Text style={tailwind('text-white text-center text-xl')}>
-                Signup
+    <ImageBackground
+      source={{
+        uri: 'https://res.cloudinary.com/dfgr7tov1/image/upload/v1707267996/bgFinEstateAuth_1_kwf1im.png',
+      }}
+      style={tw`flex-1 h-full w-full`}
+      resizeMode="cover">
+      <View style={tailwind('flex-1 justify-center px-2')}>
+        {errorMessage ? (
+          <Text style={tailwind('text-red-500 text-center mb-4')}>
+            {errorMessage}
+          </Text>
+        ) : null}
+        {/* Rest of the component? How will I merge it with isLoading for the spinner (which I really like!!) */}
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
+          <>
+            {/* View Box for the logo image to be centered */}
+            <View style={tailwind('items-center mb-12')}>
+              <Text
+                style={tailwind('font-OCOMNI uppercase text-2xl font-bold')}>
+                Finstate
+              </Text>
+            </View>
+            <View style={tailwind('pt-8')}>
+              <TextInput
+                placeholder="Email address"
+                placeholderTextColor="#9CA3AF"
+                style={tailwind(
+                  'text-black rounded-xl border border-gray-300 bg-gray-200 h-12 mb-2 px-4 ',
+                )}
+                value={email}
+                onChangeText={setEmail}
+              />
+              <TextInput
+                placeholder="Password"
+                placeholderTextColor="#9CA3AF"
+                secureTextEntry
+                style={tailwind(
+                  'text-black rounded-xl border border-gray-300 bg-gray-200 h-12 px-4',
+                )}
+                value={password}
+                onChangeText={setPassword}
+              />
+            </View>
+            <View>
+              <TouchableOpacity
+                style={tailwind('mt-4 rounded-xl bg-blue-500 py-3')}
+                onPress={handleSignup}>
+                <Text style={tailwind('text-white text-center text-xl')}>
+                  Signup
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+              <Text style={tailwind('text-center text-blue-500')}>
+                Have an account? Sign in
               </Text>
             </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={tailwind('text-center text-blue-500')}>
-              Have an account? Sign in
-            </Text>
-          </TouchableOpacity>
-        </>
-      )}
-    </View>
+          </>
+        )}
+      </View>
+    </ImageBackground>
   );
 };
 
