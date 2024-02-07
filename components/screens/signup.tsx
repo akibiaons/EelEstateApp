@@ -120,9 +120,8 @@ const SignupScreen = ({navigation}: Props) => {
                 }}
                 style={tw`w-32 h-20`}
               />
-              <Text style={tailwind('font-OCOMNI uppercase text-xl ')}>
-                Fin-Estate
-              </Text>
+              <Text style={tailwind('font-OCOMNI mb-4')}>Rental App</Text>
+              <Text style={tw`text-lg uppercase font-bold`}>Signup</Text>
             </View>
             <View style={tailwind('pt-8')}>
               <TextInput
